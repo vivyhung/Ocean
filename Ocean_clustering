@@ -1,0 +1,14 @@
+setwd("/Users/vivi/Documents/04-UMD/10-case competition/0222-datachallenge/data")
+ocean <- read.csv("Data_Level5_BAH_OceanCleanup.csv", header=TRUE, stringsAsFactors = FALSE)
+setwd("/Users/vivi/Documents/04-UMD/10-case competition/0222-datachallenge/data/clustering")
+ocean.cluster <- read.csv("Data_1.csv", header=TRUE, stringsAsFactors = FALSE)
+
+
+#recode cleanup type
+ocean.cluster$type[ocean.cluster$Cleanup.Type=="Land (beach, shoreline and inland)"] <- 0
+ocean.cluster$type[ocean.cluster$Cleanup.Type=="Watercraft (powerboat, sailboat, kayak or canoe)"] <- 1
+ocean.cluster$type[ocean.cluster$Cleanup.Type=="Underwater"] <- 2
+
+
+
+
