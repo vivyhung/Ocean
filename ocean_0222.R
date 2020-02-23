@@ -1,5 +1,3 @@
-setwd("/Users/vivi/Documents/04-UMD/10-case competition/0222-datachallenge/data")
-ocean <- read.csv("Data_Level5_BAH_OceanCleanup.csv", header=TRUE, stringsAsFactors = FALSE)
 setwd("/Users/vivi/Documents/04-UMD/10-case competition/0222-datachallenge/data/clustering")
 ocean.cluster <- read.csv("Data_1.csv", header=TRUE, stringsAsFactors = FALSE)
 
@@ -15,81 +13,7 @@ View(o_cluster)
 
 
 
-
-
-
-
-table(o_cluster$X..of.bags)
-
-table(o_cluster$Cigarette.Butts)
-
-
-
-
-summary(o_cluster)
-help()
-
-
-
-library(ggplot2)
-ggplot(ocean, aes( Cleanup.ID, Cleanup.Type, color = Cleanup.ID)) + geom_point()
-
-names(ocean.cluster)
-
-ocean.cluster$type[ocean.cluster$Cleanup.Type=="Land (beach, shoreline and inland)"] <- 0
-ocean.cluster$type[ocean.cluster$Cleanup.Type=="Watercraft (powerboat, sailboat, kayak or canoe)"] <- 1
-ocean.cluster$type[ocean.cluster$Cleanup.Type=="Underwater"] <- 2
-View(ocean.cluster)
-
-
-
-unique(ocean.cluster$Cleanup.Type)
-
-
-
-ocean.cluster.re <- subset(ocean.cluster, select= -c(Cleanup.ID, Cleanup.Type,X))
-View(ocean.cluster.re)
-
-
-
-
-help(apply)
-help(var)
-
-
-
-
-View(o_cluster)
-o_cluster <- o_cluster[,-48]
-
-
-
-####DETERMINE THE####
-cluster <- (nrow(o_cluster)-1)*sum(apply(o_cluster,2,var))
-for (i in 2:15) cluster[i] <- sum(kmeans(o_cluster, centers=i)$withinss)
-plot(1:15, cluster, type="b", xlab="Number of Clusters", ylab="Within groups sum of squares")
-#CLUSTERS:2 OR 9
-
-
-rng<-2:20 #K from 2 to 20
-tries <-100 #Run the K Means algorithm 100 times
-avg.totw.ss <-integer(length(rng)) #Set up an empty vector to hold all of points
-for(v in rng){ # For each value of the range variable
-  v.totw.ss <-integer(tries) #Set up an empty vector to hold the 100 tries
-  for(i in 1:tries){
-    k.temp <-kmeans(data.rm.top,centers=v) #Run kmeans
-    v.totw.ss[i] <-k.temp$tot.withinss#Store the total withinss
-  }
-  avg.totw.ss[v-1] <-mean(v.totw.ss) #Average the 100 total withinss
-}
-plot(rng,avg.totw.ss,type="b", main="Total Within SS by Various K",
-     ylab="Average Total Within Sum of Squares",
-     xlab="Value of K")
-
-
-
-
-
+####DETERMINE THE ###
 
 set.seed(123)
 # Compute and plot wss for k = 2 to k = 15.
@@ -104,21 +28,6 @@ plot(1:k.max, wss,
 
 
 
-
-
-
-
-
-
-
-
-library(M3C)
-tsne(pollen$ocean.cluster.re,colvec=c('gold'))
-
-
-# EDA
-# install.packages('corrplot')
-library(corrplot)
 
 
 # Clustering
