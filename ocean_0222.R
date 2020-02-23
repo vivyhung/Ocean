@@ -27,6 +27,17 @@ plot(1:k.max, wss,
      ylab="Total within-clusters sum of squares")
 
 
+####elbow_2_ determine how many clusters####
+set.seed(123)
+# Compute and plot wss for k = 2 to k = 15.
+k.max <- 15
+wss <- sapply(1:k.max, function(k){kmeans(o_cluster[,-1], k, nstart=50,iter.max = 15 )$tot.withinss})
+wss
+plot(1:k.max, wss,
+     type="b", pch = 19, frame = FALSE, 
+     xlab="Number of clusters K",
+     ylab="Total within-clusters sum of squares")
+
 
 
 
