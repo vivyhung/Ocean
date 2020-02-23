@@ -25,13 +25,36 @@ plot(1:15, wss,
      ylab="Total within-clusters sum of squares")
 
 
-####kmeans (8 clusters)####
-set.seed(20)
-oceanCluster_8 <- kmeans(o_cluster[,-1], 8, nstart = 25)
-oceanCluster_8$size
+####kmeans (2, 9 clusters)####
+set.seed(22)
+oceanCluster_9 <- kmeans(o_cluster[,-1], 9, nstart = 25)
+oceanCluster_9$size
 
-# oceanCluster_8$size
-# [1]    94     6  1427    11 36218    16   118     4
+# oceanCluster_9$size
+#[1]     3    15     1     6  1194    75    85     1 36514
+
+set.seed(12)
+oceanCluster_2 <- kmeans(o_cluster[,-1], 2, nstart = 25)
+oceanCluster_2$size
+#> oceanCluster_2$size
+#[1]    16 37878
+
+
+# Cluster Plot against 1st 2 principal components
+o<-o_cluster[,-1]
+clusplot(o, oceanCluster_9$cluster, color=TRUE, shade=TRUE, labels=2, lines=0)
+clusplot(o, oceanCluster_2$cluster, color=TRUE, shade=TRUE, labels=2, lines=0)
+
+
+#plot for reduced dimensions (PCA) - fviz_cluster
+installed.packages("factoextra")
+library(factoextra)
+library(ggplot2)
+
+fviz_cluster(oceanCluster_9, data = o)
+fviz_cluster(oceanCluster_2, data = o)
+
+
 
 
 
